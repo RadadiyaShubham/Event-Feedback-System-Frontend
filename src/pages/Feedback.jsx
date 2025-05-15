@@ -52,7 +52,7 @@ export default function FeedbackPage() {
     try {
       const token = sessionStorage.getItem("token");
       await axios.post(
-        `${process.env.basebackendurl}/api/feedbacks`,
+        `${import.meta.env.VITE_API_URL}/api/feedbacks`,
         { event, comment, rating },
         { headers: { Authorization: `Bearer ${token}` } }
       );

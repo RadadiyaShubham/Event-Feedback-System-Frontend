@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const instance = axios.create({
-  baseURL: `${process.envbasebackendurl}/api`,
+  baseURL: `${import.meta.env.VITE_API_URL}/api`,
 });
 
 // Add a request interceptor to set the Authorization header dynamically
