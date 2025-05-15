@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const instance = axios.create({
-  baseURL: 'http://localhost:3000/api',
+  baseURL: `${process.envbasebackendurl}/api`,
 });
 
 // Add a request interceptor to set the Authorization header dynamically

@@ -15,7 +15,7 @@ export default function Login() {
     setIsLoading(true);
     
     try {
-      const res = await axios.post("http://localhost:3000/api/users/login", {
+      const res = await axios.post(`${process.env.basebackendurl}/api/users/login`, {
         email,
         password,
       });

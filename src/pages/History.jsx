@@ -3,7 +3,7 @@ import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 import { ArrowRightOnRectangleIcon, HomeIcon } from "@heroicons/react/24/outline";
 
-const BASE_URL = "http://localhost:3000/api";
+const BASE_URL = `${process.env.basebackendurl}/api`;
 
 export default function History() {
   const [feedbacks, setFeedbacks] = useState([]);
