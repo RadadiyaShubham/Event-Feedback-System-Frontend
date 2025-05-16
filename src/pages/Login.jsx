@@ -7,11 +7,13 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
+  const [success, setSuccess] = useState(false);
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
+    setSuccess(false);
     setIsLoading(true);
     
     try {
@@ -20,7 +22,8 @@ export default function Login() {
         password,
       });
       sessionStorage.setItem("token", res.data.token);
-      navigate("/feedback");
+      setSuccess(true);
+      setTimeout(() => navigate("/feedback"), 2000);
     } catch (err) {
       setError(err.response?.data?.message || "Login failed. Please try again.");
     } finally {
@@ -39,6 +42,12 @@ export default function Login() {
         {error && (
           <div className="bg-red-500/20 border border-red-500 text-red-100 p-2 rounded text-sm">
             {error}
+          </div>
+        )}
+
+        {success && (
+          <div className="bg-green-500/20 border border-green-500 text-green-100 p-2 rounded text-sm">
+            Login successful! Redirecting to feedback page...
           </div>
         )}
 
@@ -67,7 +76,7 @@ export default function Login() {
           {isLoading ? "Logging in..." : "Login"}
         </button>
         <p className="text-center mt-4">
-        Don't have an account? <Link to="/register" className="text-blue-400 underline">Register</Link>
+        Don't have an account? <Link to="/" className="text-blue-400 underline">Register</Link>
       </p>
       </form>
       

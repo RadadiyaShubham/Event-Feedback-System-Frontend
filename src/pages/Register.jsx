@@ -75,7 +75,7 @@ export default function Register() {
         </button>
         <p className="text-center mt-4">
           Already have an account?{" "}
-          <Link to="/" className="text-blue-400 underline">Login</Link>
+          <Link to="/login" className="text-blue-400 underline">Login</Link>
         </p>
       </form>
     </div>
