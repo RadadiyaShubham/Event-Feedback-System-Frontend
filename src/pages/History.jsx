@@ -86,6 +86,13 @@ export default function History() {
     }
   };
 
+  const isEditable = (createdAt) => {
+    const created = new Date(createdAt);
+    const now = new Date();
+    const diffMs = now - created;
+    return diffMs < 5 * 60 * 1000; // 3 minutes in milliseconds
+  };
+
   return (
     <div className="min-h-screen bg-gray-900 text-gray-200 px-4 py-10">
       <div className="max-w-3xl mx-auto">
@@ -130,6 +137,12 @@ export default function History() {
 
               {editingId === fb._id ? (
                 <>
+                  
+                  <textarea
+                    value={editedComment}
+                    onChange={(e) => setEditedComment(e.target.value)}
+                    className="w-full p-2 bg-gray-900 border border-gray-600 text-white rounded"
+                  />
                   <input
                     type="number"
                     min="1"
@@ -138,11 +151,9 @@ export default function History() {
                     onChange={(e) => setEditedRating(Number(e.target.value))}
                     className="w-full mt-2 mb-2 p-2 bg-gray-900 border border-gray-600 text-white rounded"
                   />
-                  <textarea
-                    value={editedComment}
-                    onChange={(e) => setEditedComment(e.target.value)}
-                    className="w-full p-2 bg-gray-900 border border-gray-600 text-white rounded"
-                  />
+                  <p className="text-sm text-yellow-400 mb-2">
+                    Preview: {"★".repeat(editedRating)}
+                  </p>
                   <div className="flex gap-2 mt-2">
                     <button
                       onClick={saveEdit}
@@ -162,19 +173,26 @@ export default function History() {
                 </>
               ) : (
                 <>
-                  <p className="text-sm text-gray-300">Rating: {fb.rating} ★</p>
+                  
                   {fb.comment && (
                     <p className="text-sm text-gray-400 mt-1">
                       Comment: {fb.comment}
                     </p>
                   )}
+                  <p className="text-sm text-gray-300">
+                    Rating: {"★".repeat(fb.rating)}
+                  </p>
                   <div className="flex gap-2 mt-3">
-                    <button
-                      onClick={() => startEditing(fb)}
-                      className="bg-yellow-300 hover:bg-yellow-400 px-3 py-1 rounded text-black font-semibold"
-                    >
-                      Edit
-                    </button>
+                    {isEditable(fb.createdAt) ? (
+                      <button
+                        onClick={() => startEditing(fb)}
+                        className="bg-yellow-300 hover:bg-yellow-400 px-3 py-1 rounded text-black font-semibold"
+                      >
+                        Edit
+                      </button>
+                    ) : (
+                      <span className="text-xs text-gray-500">Edit Button closed</span>
+                    )}
                     <button
                       onClick={() => deleteFeedback(fb._id)}
                       disabled={isDeleting}

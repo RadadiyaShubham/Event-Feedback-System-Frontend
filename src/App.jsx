@@ -4,6 +4,7 @@ import Feedback from "./pages/Feedback";
 import History from "./pages/History";
 import ProtectedRoute from "./ProtectedRoute";
 import PageNotFound from "./pages/PageNotFound"; // Import your 404 page
+import Register from "./pages/Register";
 
 export default function App() {
   return (
@@ -31,6 +32,8 @@ export default function App() {
 
         {/* Catch all unmatched routes */}
         <Route path="*" element={<PageNotFound />} />
+
+        <Route path="/register" element={<Register />} />
       </Routes>
     </Router>
   );
