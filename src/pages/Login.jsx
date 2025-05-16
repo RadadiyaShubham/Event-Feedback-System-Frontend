@@ -76,7 +76,7 @@ export default function Login() {
           {isLoading ? "Logging in..." : "Login"}
         </button>
         <p className="text-center mt-4">
-        Don't have an account? <Link to="/" className="text-blue-400 underline">Register</Link>
+        Don't have an account? <Link to="/register" className="text-blue-400 underline">Register</Link>
       </p>
       </form>
       
